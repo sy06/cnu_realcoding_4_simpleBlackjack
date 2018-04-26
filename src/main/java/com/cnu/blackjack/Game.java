@@ -39,7 +39,7 @@ public class Game {
                 throw new NotEveyonePlacedBetException();
             }
         });
-
+        //evaluator를 생성한다.(생성자에 player가 카드를 hit하는 것이 있다.
 
 
     }
