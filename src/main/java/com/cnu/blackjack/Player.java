@@ -16,13 +16,18 @@ public class Player {
     }
 
     public void placeBet(int bet) {
-        if(balance < bet) {
+        if (balance < bet) {
             throw new NotEnoughBalanceException();
         }
         balance -= bet;
         currentBet = bet;
     }
+    //결과에 따라서 해당 배팅금액을 player에게 지불하는 메소드
+    public void resultBet(){
+        
+    }
 
+    //덱에서 카드를 받아오는것
     public Card hitCard() {
         return hand.drawCard();
     }

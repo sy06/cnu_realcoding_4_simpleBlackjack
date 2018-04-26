@@ -17,6 +17,7 @@ public class Game {
         this.deck = deck;
     }
 
+    //새로운 player를 생성한다.
     public void addPlayer(String playerName, int seedMoney) {
         Player player = new Player(seedMoney, new Hand(deck));
         if (playerList.get(playerName) != null) {
@@ -25,16 +26,20 @@ public class Game {
         playerList.put(playerName, player);
     }
 
+
     public Map<String, Player> getPlayerList() {
         return playerList;
     }
 
     public void start() {
+
         playerList.forEach((name, player) -> {
+            //player에게 현재 배팅할 금액을 입력받는다
             if (player.getCurrentBet() == 0) {
                 throw new NotEveyonePlacedBetException();
             }
         });
+
 
 
     }
