@@ -44,7 +44,7 @@ public class Deck {
     public void shuffle() {
 	for (int i = 51 ; i > 0 ; i--) {
 	    Random ran = new Random();
-	    int random = ran.newInt() % (i+1);
+	    int random = ran.nextInt() % (i+1);
 	    Card temp = cardList.get(i);
 	    cardList.set(i, cardList.get(random));
 	    cardList.set(random, temp);

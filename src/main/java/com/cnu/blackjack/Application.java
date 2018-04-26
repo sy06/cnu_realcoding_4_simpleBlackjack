@@ -8,14 +8,9 @@ public class Application {
         game.addPlayer("player1", 5000);
         game.addPlayer("player2", 10000);
 
-        Evaluator eva = new Evaluator(game.getPlayerList());
-        eva.start();
-
-        eva.hitting();
-        eva.counting();
-        eva.batting_count();
+        game.start();
     }
     //addplayer를 호출한다.
     //addDealer를 호출한다.
-    //evaluation.start를 호출한다.
+    //game.start를 호출한다.
 }
