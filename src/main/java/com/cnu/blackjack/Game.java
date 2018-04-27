@@ -39,13 +39,13 @@ public class Game {
             int bet = input.AppIO_EnterBet();
             placeBet(name, bet);
 
-            //placeBet가 범위를 넘어갈 때도 test해줘야함. (추가해야함.)
             if (player.getCurrentBet() == 0) {
                 input.AppIO_RangeOfMoney(bet);
                 throw new NotEveyonePlacedBetException();
             }
         });
         //evaluator를 생성하여 실행한다.
+        evaluator = new Evaluator(playerList);
         evaluator.start();
 
     }
