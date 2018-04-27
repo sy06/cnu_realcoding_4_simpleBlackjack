@@ -3,6 +3,11 @@ package com.cnu.blackjack;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.assertTrue;
+
 public class EvaluatorTest {
     Hand hand;
     @Before
@@ -19,7 +24,13 @@ public class EvaluatorTest {
 
     @Test
     public void 각_플레이어는_16이하면_히트한다() {
+        Map<String, Player> playerlist = new HashMap<>();
         Player player = new Player(5000, hand);
+        player.setCardlist_score(16);
+        playerlist.put("player1", player);
+        Evaluator evl = new Evaluator(playerlist);
+        evl.hit_or_stand();
+        assertTrue(player.getHand().getCardList().size() == 3);
     }
 
     @Test
@@ -31,25 +42,5 @@ public class EvaluatorTest {
     @Test
     public void 각_플레이어는_17이상이면_스테이한다() {
         Player player = new Player(5000, hand);
-    }
-
-    @Test
-    public void 각_플레이어에게_hit을_할_것인지_물어본다(){
-
-    }
-
-    @Test
-    public void 각_플레이어가_hit에대해_잘못된_대답을_적었을_경우_다시_물어본다(){
-
-    }
-
-    @Test
-    public void 플레이어가_stand를_할_경우_더이상_hit에_대해_물어보지_않는다(){
-
-    }
-
-    @Test
-    public void 모든_플레이어가_stand를_할_경우_게임의_결과를_계산한다() {
-
     }
 }
