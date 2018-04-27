@@ -39,18 +39,6 @@ public class AppIO {
         System.out.println("***딜러와 당신 모두 21점을 넘겼으므로 동점입니다. 무승부입니다!***");
     }
 
-    public void AppIO_msg_ShowCards(String name){
-        System.out.println( "플레이어 "+name+"의 카드는 : " );
-    }
-
-    public void AppIO_ShowOfDealersCard(){
-        System.out.println( "딜러의 카드는 : ");
-    }
-
-    public void AppIO_TotalOfPlay(int value){
-        System.out.print("(now_total: " + value + ")");
-    }
-
     public void AppIO_msg_UserHit(String name){
         System.out.println("플레이어 "+name+"은 Hit을 선택했습니다.");
     }
@@ -59,7 +47,7 @@ public class AppIO {
         System.out.println("플레이어 "+name+"은 Stand을 선택했습니다.");
     }
 
-    public void AppIO_msg_Over21byDealer(String name){
+    public void AppIO_msg_Over21byDealer(){
         System.out.println("딜러는 21점을 초과했습니다.");
     }
 
@@ -75,7 +63,7 @@ public class AppIO {
         System.out.println("***딜러의 승리입니다! ( 최종 딜러의 총점 : " + dh + " , 최종 플레이어의 총점 : " + ph + " )***");
     }
 
-    public void AppIO_msg_DealerWin(String name){
+    public void AppIO_msg_DealerWinWhenSameScore(String name) {
         System.out.println("***딜러와 동점입니다. 플레이어 "+name+"의 패배입니다!***");
     }
 
