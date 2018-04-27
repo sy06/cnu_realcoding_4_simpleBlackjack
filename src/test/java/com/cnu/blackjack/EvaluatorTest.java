@@ -3,6 +3,9 @@ package com.cnu.blackjack;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+
 public class EvaluatorTest {
     Hand hand;
     @Before
@@ -12,9 +15,16 @@ public class EvaluatorTest {
 
     @Test
     public void 게임초기화시_모든플레이어는_2장의카드를_받는다() {
-        Player player = new Player(5000, hand);
         //dealcardtoplayer함수를 사용
-        //assertThat(CardList.size(),is(2));
+        Game game = new Game(new Deck(1));
+        Evaluator evaluator = new Evaluator(game.getPlayerList());
+        evaluator.start();
+        game.getPlayerList().forEach((name, player) -> {
+
+            assertThat(player.getHand().getCardList().size(),is(2));
+
+        });
+
     }
 
     @Test
