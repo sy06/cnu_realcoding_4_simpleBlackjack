@@ -136,7 +136,6 @@ public class Evaluator {
             } else {
                 returnBet = player.getCurrentBet();
                 input.AppIO_PlayWinandPoint(player.cardlist_score_count(), dealer.getDealerScore(), name);
-                input.AppIO_PlayWinandPoint(dealer.getDealerScore(), player.cardlist_score_count(), name);
             }
         }
         return returnBet;
