@@ -34,14 +34,15 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void 각_플레이어는_16이하면_히트한다() {
+    public void 각_플레이어는_16이하면_히트한다() { //수정요망 
         Map<String, Player> playerlist = new HashMap<>();
         Player player = new Player(5000, hand);
         playerlist.put("player1", player);
         Evaluator evl = new Evaluator(playerlist);
+        System.out.println("테스트를 위해 현재 점수를 "+player.getCardlist_score()+"-> 16로 임의설정함.");
         player.setCardlist_score(16);
         evl.hit_or_stand();
-        assertTrue(player.getHand().getCardList().size() == 3);
+        assertTrue(player.getCardlist_score() > 16);
     }
 
     @Test
@@ -51,8 +52,10 @@ public class EvaluatorTest {
         player1.placeBet(1000);
         playerlist.put("player1", player1);
         Evaluator evl = new Evaluator(playerlist);
-        player1.setCardlist_score(21);
         evl.hit_or_stand();
+        System.out.println("테스트를 위해 현재 점수를"+player1.getCardlist_score()+"-> 21(블랙잭)로 임의설정함.");
+        player1.setCardlist_score(21);
+        evl.result();
         assertTrue(player1.getBalance() == 6000);
     }
 
@@ -62,8 +65,9 @@ public class EvaluatorTest {
         Player player1 = new Player(5000, hand);
         playerlist.put("player1", player1);
         Evaluator evl = new Evaluator(playerlist);
-        player1.setCardlist_score(17);
         evl.hit_or_stand();
+        System.out.println("테스트를 위해 현재 점수를 "+player1.getCardlist_score()+"-> 17로 임의설정함.");
+        player1.setCardlist_score(17);
         assertTrue(player1.getCardlist_score() == 17);
     }
 }

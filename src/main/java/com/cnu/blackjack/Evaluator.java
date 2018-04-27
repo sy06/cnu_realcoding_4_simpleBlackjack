@@ -16,27 +16,27 @@ public class Evaluator {
         this.playerMap = playerMap;
         dealer = new Dealer();
         dealCardToPlayers();
-
     }
 
     public void start(){
         input.AppIO_msg_Welcome();
         this.hit_or_stand();
+        System.out.println();
         this.result();
     }
 
-    private void result() {
-        int dealer_score = this.dealer.getDealerScore();
+    public void result() {
         playerMap.forEach((name, player) ->{
             boolean win = this.compare_score_and_batcount(player, name);
+            System.out.println("---------------------------------------");
         });
     }
 
     private boolean compare_score_and_batcount(Player player, String name){
-        int playerMoney = batting_count(player, name);
-        input.AppIO_CurrentAsset(playerMoney);
+        int playerMoney = player.cal_BetMoney(batting_count(player, name));
+        input.AppIO_CurrentAsset(playerMoney,name);
         if (playerMoney == 0) {
-            input.AppIO_msg_WasteMoney();
+            input.AppIO_msg_WasteMoney(name);
         }
         return true;
 
@@ -48,12 +48,12 @@ public class Evaluator {
         playerMap.forEach((name, player) -> {
             player.hitCard();
             player.hitCard();
-            //input.AppIO_msg_UserHit(name);
         });
     }
 
     public void hit_or_stand() {
         //player가 hit을 하면 카드를 주고 그렇지 않으면 주지 않는다.
+        dealer.setDealerScore(); //딜러 점수 세팅
 
         playerMap.forEach((name, player) -> {
             int score = player.cardlist_score_count();
@@ -62,13 +62,20 @@ public class Evaluator {
                 this.blackjack(name, player);
             } else if (score < 17) {
                 player.getHand().stateOfPlayerHand(name);
-                while(player.cardlist_score_count() < 17){
+                while(score < 17){
                     player.hitCard();
                     input.AppIO_msg_UserHit(name);
                     player.getHand().stateOfPlayerHand(name);
+                    score = player.cardlist_score_count();
                 }
                 input.AppIO_msg_UserStand(name);
             }
+            System.out.println();
+            System.out.println("*** 최종결과 ***");
+            player.getHand().stateOfPlayerHand(name);
+            input.AppIO_msg_ShowPlayerScore(score,name);
+            input.AppIO_msg_ShowDealerScore(dealer.getDealerScore()); //딜러 점수 보여주기
+            System.out.println("---------------------------------------");
         });
     }
 
@@ -95,7 +102,7 @@ public class Evaluator {
         if(dealer.getDealerScore() > 21){
             if (player.cardlist_score_count() > 21) { //둘 다 21점이 넘을 경우
                 returnBet = player.getCurrentBet();
-                input.AppIO_msg_SameBurst();
+                input.AppIO_msg_SameBurst(name);
             }
             else {//딜러만 21이 넘을 경우
                 returnBet = player.getCurrentBet();
@@ -128,10 +135,10 @@ public class Evaluator {
                 input.AppIO_DealerWinandPoint(dealer.getDealerScore(), player.cardlist_score_count());
             } else {
                 returnBet = player.getCurrentBet();
+                input.AppIO_PlayWinandPoint(player.cardlist_score_count(), dealer.getDealerScore(), name);
                 input.AppIO_PlayWinandPoint(dealer.getDealerScore(), player.cardlist_score_count(), name);
             }
         }
         return returnBet;
     }
-
 }
