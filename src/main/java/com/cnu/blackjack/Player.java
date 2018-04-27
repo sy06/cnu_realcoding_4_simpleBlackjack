@@ -13,6 +13,7 @@ public class Player {
     private int currentBet;
     private Hand hand;
     private int cardlist_score;
+    public AppIO input = new AppIO();
 
     public Player(int seedMoney, Hand hand) {
         this.balance = seedMoney;
@@ -21,6 +22,7 @@ public class Player {
 
     public void placeBet(int bet) {
         if (balance < bet) {
+            input.AppIO_RangeOfMoney(balance);
             throw new NotEnoughBalanceException();
         }
         balance -= bet;

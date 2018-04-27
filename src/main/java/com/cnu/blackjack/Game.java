@@ -36,9 +36,11 @@ public class Game {
         playerList.forEach((name, player) -> {
             //player에게 현재 배팅할 금액을 입력받는다
             input.AppIO_msg_Bet(name);
-            placeBet(name,input.AppIO_EnterBet());
+            int bet = input.AppIO_EnterBet();
+            placeBet(name, bet);
 
             if (player.getCurrentBet() == 0) {
+                input.AppIO_RangeOfMoney(bet);
                 throw new NotEveyonePlacedBetException();
             }
         });
