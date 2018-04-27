@@ -13,7 +13,7 @@ public class Game {
     private Map<String, Player> playerList = new HashMap<>();
     private Deck deck;
     private Evaluator evaluator;
-
+    public AppIO input = new AppIO();
     public Game(Deck deck) {
         this.deck = deck;
     }
@@ -33,13 +33,10 @@ public class Game {
     }
 
     public void start() {
-
-        Scanner sc = new Scanner(System.in);
         playerList.forEach((name, player) -> {
             //player에게 현재 배팅할 금액을 입력받는다
-            System.out.println(name+": 배팅할 금액을 입력하세요");
-            int initialbetmoney = sc.nextInt();
-            placeBet(name,initialbetmoney);
+            input.AppIO_msg_Bet(name);
+            placeBet(name,input.AppIO_EnterBet());
 
             //placeBet가 범위를 넘어갈 때도 test해줘야함. (추가해야함.)
             if (player.getCurrentBet() == 0) {
