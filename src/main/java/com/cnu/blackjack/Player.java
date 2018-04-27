@@ -40,7 +40,11 @@ public class Player {
         cardlist_score=0;
 
         for(int i=0;i<playerCardList.size();i++){
-            cardlist_score += playerCardList.get(i).getRank();
+            int tempscore = playerCardList.get(i).getRank();
+            if(tempscore >= 10) {
+                tempscore = 10;
+            }
+            cardlist_score += tempscore;
         }
 
         return cardlist_score;
