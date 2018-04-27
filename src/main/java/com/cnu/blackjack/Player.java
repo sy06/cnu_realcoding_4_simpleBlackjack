@@ -3,6 +3,9 @@ package com.cnu.blackjack;
 import com.cnu.blackjack.exceptions.NotEnoughBalanceException;
 import lombok.Data;
 
+import java.util.List;
+import java.util.Scanner;
+
 @Data
 public class Player {
 
@@ -35,6 +38,13 @@ public class Player {
 
     public int cardlist_score_count(){
         //카드 스코어를 계산하여 리턴
+        List<Card> playerCardList = hand.getCardList();
+        cardlist_score=0;
+
+        for(int i=0;i<playerCardList.size();i++){
+            cardlist_score += playerCardList.get(i).getRank();
+        }
+
         return cardlist_score;
     }
 }

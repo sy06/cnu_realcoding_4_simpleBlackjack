@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class PlayerTest {
 
@@ -41,4 +42,14 @@ public class PlayerTest {
         Player player = new Player(5000, hand);
         assertThat(player.hitCard(), notNullValue());
     }
+
+    @Test
+    public void 플레이어가_받은카드의_rank의합이_플레이어의_카드리스트점수와_같아야한다(){
+        Player player = new Player(5000, hand);
+        Card tempcard1 = player.hitCard();
+        Card tempcard2 = player.hitCard();
+        int tempscore = tempcard1.getRank()+tempcard2.getRank();
+        assertTrue(player.cardlist_score_count() == tempscore);
+    }
+
 }
