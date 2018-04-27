@@ -17,25 +17,15 @@ public class EvaluatorTest {
 
     @Test
     public void 게임초기화시_모든플레이어는_2장의카드를_받는다() {
-        Map<String, Player> playerlist = new HashMap<>();
-        Player player1 = new Player(5000, hand);
-        Player player2 = new Player(5000, hand);
-        playerlist.put("player1", player1);
-        playerlist.put("player2", player2);
-        Evaluator evl = new Evaluator(playerlist);
-        System.out.println(player1.getHand().getCardList().size());
-        System.out.println(player2.getHand().getCardList().size());
-//        assertTrue(player1.getHand().getCardList().size() == 2);
-//        assertTrue(player2.getHand().getCardList().size() == 2);
     }
 
     @Test
     public void 각_플레이어는_16이하면_히트한다() {
         Map<String, Player> playerlist = new HashMap<>();
         Player player = new Player(5000, hand);
-        player.setCardlist_score(16);
         playerlist.put("player1", player);
         Evaluator evl = new Evaluator(playerlist);
+        player.setCardlist_score(16);
         evl.hit_or_stand();
         assertTrue(player.getHand().getCardList().size() == 3);
     }
@@ -45,15 +35,21 @@ public class EvaluatorTest {
         Map<String, Player> playerlist = new HashMap<>();
         Player player1 = new Player(5000, hand);
         player1.placeBet(1000);
-        player1.setCardlist_score(21);
         playerlist.put("player1", player1);
         Evaluator evl = new Evaluator(playerlist);
+        player1.setCardlist_score(21);
         evl.hit_or_stand();
         assertTrue(player1.getBalance() == 6000);
     }
 
     @Test
     public void 각_플레이어는_17이상이면_스테이한다() {
-        Player player = new Player(5000, hand);
+        Map<String, Player> playerlist = new HashMap<>();
+        Player player1 = new Player(5000, hand);
+        playerlist.put("player1", player1);
+        Evaluator evl = new Evaluator(playerlist);
+        player1.setCardlist_score(17);
+        evl.hit_or_stand();
+        assertTrue(player1.getCardlist_score() == 17);
     }
 }
