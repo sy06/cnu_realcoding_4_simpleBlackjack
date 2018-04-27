@@ -18,7 +18,6 @@ public class Evaluator {
     }
 
     public void start(){
-        this.dealCardToPlayers();
         this.hit_or_stand();
         this.result();
     }
@@ -37,7 +36,7 @@ public class Evaluator {
 
     //hitCard() = 덱에서 카드 한장을 뽑아서 사용자의 카드 리스트에 추가해준다.
     //맨 처음에만 호출하는거
-    private void dealCardToPlayers() {
+    public void dealCardToPlayers() {
         playerMap.forEach((name, player) -> {
             player.hitCard();
             player.hitCard();
