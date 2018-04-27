@@ -3,6 +3,8 @@ package com.cnu.blackjack;
 import com.cnu.blackjack.exceptions.NotEnoughBalanceException;
 import lombok.Data;
 
+import java.util.Scanner;
+
 @Data
 public class Player {
 
