@@ -21,7 +21,6 @@ public class Evaluator {
 
     public void start(){
         input.AppIO_msg_Welcome();
-        this.dealCardToPlayers();
         this.hit_or_stand();
         this.result();
     }
@@ -45,7 +44,7 @@ public class Evaluator {
         playerMap.forEach((name, player) -> {
             player.hitCard();
             player.hitCard();
-            input.AppIO_msg_UserHit(name);
+            //input.AppIO_msg_UserHit(name);
         });
     }
 
@@ -60,6 +59,7 @@ public class Evaluator {
 
                 while(player.cardlist_score_count() < 17){
                     player.hitCard();
+                    input.AppIO_msg_UserHit(name);
                 }
                 input.AppIO_msg_UserStand(name);
             }
