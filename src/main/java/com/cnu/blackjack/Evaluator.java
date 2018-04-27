@@ -1,6 +1,7 @@
 package com.cnu.blackjack;
 
 import java.util.Map;
+import java.util.Scanner;
 
 public class Evaluator {
 
@@ -15,6 +16,7 @@ public class Evaluator {
     }
 
     public void start() {
+        this.dealCardToPlayers();
         hit_or_stand();
         result();
     }
@@ -41,7 +43,18 @@ public class Evaluator {
     }
 
     public void hit_or_stand() {
-        //player가 hit을 하면 카드를 주고 구렇지 않으면 주지 않는다.
+        //player가 hit을 하면 카드를 주고 그렇지 않으면 주지 않는다.
+        Scanner sc = new Scanner(System.in);
+        hitplayerMap.forEach((name, player) -> {
+            System.out.println(name+" : hit을 하시겠습니까?[true or false]");
+            boolean hit = sc.nextBoolean();
+            if(hit){
+                player.hitCard();
+            }
+            else{
+                hitplayerMap.remove(name);
+            }
+        });
         /*1. player중 한명이라도 hit을 원하면 hit을 하는 조건문으로 들어감
           2. 전체 playerlist를 순회하면서 hit을 원하는 player만 따로 list생성
           3. 해당 player에게 hit메소드 호출

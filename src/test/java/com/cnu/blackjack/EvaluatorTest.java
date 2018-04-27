@@ -31,6 +31,25 @@ public class EvaluatorTest {
     @Test
     public void 각_플레이어는_17이상이면_스테이한다() {
         Player player = new Player(5000, hand);
+    }
+
+    @Test
+    public void 각_플레이어에게_hit을_할_것인지_물어본다(){
+
+    }
+
+    @Test
+    public void 각_플레이어가_hit에대해_잘못된_대답을_적었을_경우_다시_물어본다(){
+
+    }
+
+    @Test
+    public void 플레이어가_stand를_할_경우_더이상_hit에_대해_물어보지_않는다(){
+
+    }
+
+    @Test
+    public void 모든_플레이어가_stand를_할_경우_게임의_결과를_계산한다() {
 
     }
 }
