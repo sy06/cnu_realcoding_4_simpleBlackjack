@@ -49,11 +49,11 @@ public class Evaluator {
         //player가 hit을 하면 카드를 주고 그렇지 않으면 주지 않는다.
 
         playerMap.forEach((name, player) -> {
-            int score = player.getCardlist_score();
+            int score = player.cardlist_score_count();
             if (score == 21) {
                 this.blackjack(player);
             } else if (score < 17) {
-                while(player.getCardlist_score() < 17)
+                while(player.cardlist_score_count() < 17)
                     player.hitCard();
             }
         });
