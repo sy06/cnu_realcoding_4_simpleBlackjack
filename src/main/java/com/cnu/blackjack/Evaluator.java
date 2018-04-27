@@ -10,6 +10,7 @@ public class Evaluator {
 
     private Map<String, Player> playerMap;
     private Dealer dealer;
+    public AppIO input = new AppIO();
 
     public Evaluator(Map<String, Player> playerMap) {
         this.playerMap = playerMap;
@@ -18,6 +19,7 @@ public class Evaluator {
     }
 
     public void start(){
+        input.AppIO_msg_Welcome();
         this.dealCardToPlayers();
         this.hit_or_stand();
         this.result();
@@ -41,6 +43,7 @@ public class Evaluator {
         playerMap.forEach((name, player) -> {
             player.hitCard();
             player.hitCard();
+            input.AppIO_msg_UserHit(name);
         });
     }
 
@@ -50,22 +53,20 @@ public class Evaluator {
         playerMap.forEach((name, player) -> {
             int score = player.getCardlist_score();
             if (score == 21) {
-                this.blackjack(player);
+                this.blackjack(name, player);
             } else if (score < 17) {
-                while(player.getCardlist_score() < 17)
+                while(player.getCardlist_score() < 17) {
                     player.hitCard();
+                }
+                input.AppIO_msg_UserStand(name);
             }
         });
     }
 
-    private void blackjack(Player player) {
+    private void blackjack(String name, Player player) {
         player.setBalance(player.getBalance() + player.getCurrentBet() * 2);
         player.setCurrentBet(0);
-        this.printWhenBlackjack();
-    }
-
-    private void printWhenBlackjack() {
-        //blackjack일 때 출력
+        input.AppIO_msg_WinBlackjack_Player(name);
     }
 
     public void batting_count() {
