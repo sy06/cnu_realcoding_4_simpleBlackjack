@@ -1,11 +1,14 @@
 package com.cnu.blackjack;
 
-import java.util.Map;
+import lombok.Data;
 
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+@Data
 public class Evaluator {
 
     private Map<String, Player> playerMap;
-    private Map<String, Player> hitplayerMap;
     private Dealer dealer;
 
     public Evaluator(Map<String, Player> playerMap) {
@@ -15,9 +18,10 @@ public class Evaluator {
 
     }
 
-    public void start() {
-        hit_or_stand();
-        result();
+    public void start(){
+        this.dealCardToPlayers();
+        this.hit_or_stand();
+        this.result();
     }
 
     private void result() {
@@ -43,13 +47,27 @@ public class Evaluator {
     }
 
     public void hit_or_stand() {
-        //player가 hit을 하면 카드를 주고 구렇지 않으면 주지 않는다.
-        /*1. player중 한명이라도 hit을 원하면 hit을 하는 조건문으로 들어감
-          2. 전체 playerlist를 순회하면서 hit을 원하는 player만 따로 list생성
-          3. 해당 player에게 hit메소드 호출
-          4. 딜러에게도 hit메소드 호출
-          5. 모든 사람이 stop을 외칠때까지 반복
-        */
+        //player가 hit을 하면 카드를 주고 그렇지 않으면 주지 않는다.
+
+        playerMap.forEach((name, player) -> {
+            int score = player.getCardlist_score();
+            if (score == 21) {
+                this.blackjack(player);
+            } else if (score < 17) {
+                while(player.getCardlist_score() < 17)
+                    player.hitCard();
+            }
+        });
+    }
+
+    private void blackjack(Player player) {
+        player.setBalance(player.getBalance() + player.getCurrentBet() * 2);
+        player.setCurrentBet(0);
+        this.printWhenBlackjack();
+    }
+
+    private void printWhenBlackjack() {
+        //blackjack일 때 출력
     }
 
     public int batting_count(Player player) {
