@@ -9,6 +9,7 @@ public class Player {
     private int balance;
     private int currentBet;
     private Hand hand;
+    private int cardlist_score;
 
     public Player(int seedMoney, Hand hand) {
         this.balance = seedMoney;
@@ -30,5 +31,10 @@ public class Player {
     //덱에서 카드를 받아오는것
     public Card hitCard() {
         return hand.drawCard();
+    }
+
+    public int cardlist_score_count(){
+        //카드 스코어를 계산하여 리턴
+        return cardlist_score;
     }
 }
