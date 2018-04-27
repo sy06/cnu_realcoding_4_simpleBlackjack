@@ -1,1 +1,10 @@
-# cnu_realcoding_4_simpleBlackjack
+cnu_realcoding_4_simpleBlackjack
+=================================
+
+<br>
+
+1. 강효정 201601968
+2. 서유경 201602013
+3. 조하정 201602076
+4. 진수연 201602082
+
