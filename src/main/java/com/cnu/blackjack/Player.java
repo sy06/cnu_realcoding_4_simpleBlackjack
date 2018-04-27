@@ -20,13 +20,15 @@ public class Player {
         this.hand = hand;
     }
 
-    public void placeBet(int bet) {
+    public int placeBet(int bet) {
         if (balance < bet) {
             input.AppIO_RangeOfMoney(balance);
             throw new NotEnoughBalanceException();
         }
         balance -= bet;
         currentBet = bet;
+
+        return currentBet;
     }
 
     //덱에서 카드를 받아오는것
@@ -48,5 +50,10 @@ public class Player {
         }
 
         return cardlist_score;
+    }
+
+    public int cal_BetMoney(int returnBet){
+        balance += 2*returnBet;
+        return balance;
     }
 }

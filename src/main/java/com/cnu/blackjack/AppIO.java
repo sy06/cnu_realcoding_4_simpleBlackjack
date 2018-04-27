@@ -9,8 +9,8 @@ public class AppIO {
         System.out.println("Blackjack 게임을 시작합니다.");
     }
 
-    public void AppIO_CurrentAsset(int money){
-        System.out.println("현재 당신은 $"+money+"를 가지고 있습니다.");
+    public void AppIO_CurrentAsset(int money,String name){
+        System.out.println("현재 "+name+"은 $"+money+"를 가지고 있습니다.");
     }
 
     public void AppIO_RangeOfMoney(int money){
@@ -28,27 +28,23 @@ public class AppIO {
         return bet;
     }
 
-    public void AppIO_msg_WasteMoney(){
+    public void AppIO_msg_ShowDealerScore(int score){
+        System.out.println("딜러의 점수는 "+score+"입니다.");
+    }
+
+    public void AppIO_msg_ShowPlayerScore(int score, String name){
+        System.out.println("플레이어 "+name+"의 점수는 "+score+"입니다.");
+    }
+
+    public void AppIO_msg_WasteMoney(String name){
         System.out.println();
-        System.out.println("당신은 현재 돈이 없는 것 같군요!");
+        System.out.println(name+"은 현재 돈이 없는 것 같군요!");
         System.out.println("게임이 자동 종료됩니다! 수고하셨습니다!");
         System.out.println();
     }
 
-    public void AppIO_msg_SameBurst(){
-        System.out.println("***딜러와 당신 모두 21점을 넘겼으므로 동점입니다. 무승부입니다!***");
-    }
-
-    public void AppIO_msg_ShowCards(String name){
-        System.out.println( "플레이어 "+name+"의 카드는 : " );
-    }
-
-    public void AppIO_ShowOfDealersCard(){
-        System.out.println( "딜러의 카드는 : ");
-    }
-
-    public void AppIO_TotalOfPlay(int value){
-        System.out.print("(now_total: " + value + ")");
+    public void AppIO_msg_SameBurst(String name){
+        System.out.println("***딜러와 "+name+" 모두 21점을 넘겼으므로 동점입니다. 무승부입니다!***");
     }
 
     public void AppIO_msg_UserHit(String name){
@@ -59,7 +55,7 @@ public class AppIO {
         System.out.println("플레이어 "+name+"은 Stand을 선택했습니다.");
     }
 
-    public void AppIO_msg_Over21byDealer(String name){
+    public void AppIO_msg_Over21byDealer(){
         System.out.println("딜러는 21점을 초과했습니다.");
     }
 
@@ -75,7 +71,7 @@ public class AppIO {
         System.out.println("***딜러의 승리입니다! ( 최종 딜러의 총점 : " + dh + " , 최종 플레이어의 총점 : " + ph + " )***");
     }
 
-    public void AppIO_msg_DealerWin(String name){
+    public void AppIO_msg_DealerWinWhenSameScore(String name) {
         System.out.println("***딜러와 동점입니다. 플레이어 "+name+"의 패배입니다!***");
     }
 
