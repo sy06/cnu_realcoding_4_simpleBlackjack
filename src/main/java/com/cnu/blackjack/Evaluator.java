@@ -100,7 +100,7 @@ public class Evaluator {
         // 딜러가 21이 넘을 경우
         if(dealer.getDealerScore() > 21){
             if (player.cardlist_score_count() > 21) { //둘 다 21점이 넘을 경우
-                returnBet = player.getCurrentBet();
+                returnBet = 0;
                 input.AppIO_msg_SameBurst(name);
             }
             else {//딜러만 21이 넘을 경우
@@ -118,12 +118,6 @@ public class Evaluator {
             returnBet = 0;
             input.AppIO_msg_DealerWinWhenSameScore(name);
         }
-        // player가 블랙잭일 경우
-        else if(player.cardlist_score_count() == 21 && player.getHand().getCardList().size() == 2){
-            returnBet = player.getCurrentBet()*3;
-            input.AppIO_msg_WinBlackjack_Player(name);
-        }
-
         else if (dealer.getDealerScore() == 21) {   //딜러가 블랙잭일 경우
             returnBet = 0;
             input.AppIO_msg_WinBlackjack_Dealer();

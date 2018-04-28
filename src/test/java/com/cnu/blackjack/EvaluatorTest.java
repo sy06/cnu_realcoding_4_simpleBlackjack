@@ -57,7 +57,6 @@ public class EvaluatorTest {
         System.out.println("테스트를 위해 현재 점수를 21(블랙잭)로 임의설정함.");
         player1.setCardlist_score(21);
         evl.hit_or_stand();
-        evl.result();
         assertTrue(player1.getBalance() == 7000);
     }
 
