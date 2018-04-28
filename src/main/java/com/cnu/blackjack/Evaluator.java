@@ -21,25 +21,29 @@ public class Evaluator {
     public void start(){
         input.AppIO_msg_Welcome();
         this.hit_or_stand();
-        System.out.println();
         this.result();
     }
 
     public void result() {
         playerMap.forEach((name, player) ->{
-            boolean win = this.compare_score_and_batcount(player, name);
+            System.out.println();
+            System.out.println("*** 최종결과 ***");
+            player.getHand().stateOfPlayerHand(name);
+            input.AppIO_msg_ShowPlayerScore(player.cardlist_score_count(),name);
+            input.AppIO_msg_ShowDealerScore(dealer.getDealerScore()); //딜러 점수 보여주기
+            System.out.println();
+            this.compare_score_and_batcount(player, name);
             System.out.println("---------------------------------------");
         });
     }
 
-    private boolean compare_score_and_batcount(Player player, String name){
+    private void compare_score_and_batcount(Player player, String name){
         int playerMoney = player.cal_BetMoney(batting_count(player, name));
+
         input.AppIO_CurrentAsset(playerMoney,name);
         if (playerMoney == 0) {
             input.AppIO_msg_WasteMoney(name);
         }
-        return true;
-
     }
 
     //hitCard() = 덱에서 카드 한장을 뽑아서 사용자의 카드 리스트에 추가해준다.
@@ -48,6 +52,7 @@ public class Evaluator {
         playerMap.forEach((name, player) -> {
             player.hitCard();
             player.hitCard();
+            player.getCardlist_score();
         });
     }
 
@@ -56,7 +61,7 @@ public class Evaluator {
         dealer.setDealerScore(); //딜러 점수 세팅
 
         playerMap.forEach((name, player) -> {
-            int score = player.cardlist_score_count();
+            int score = player.getCardlist_score();
             if (score == 21) {
                 player.getHand().stateOfPlayerHand(name);
                 this.blackjack(name, player);
@@ -70,17 +75,11 @@ public class Evaluator {
                 }
                 input.AppIO_msg_UserStand(name);
             }
-            System.out.println();
-            System.out.println("*** 최종결과 ***");
-            player.getHand().stateOfPlayerHand(name);
-            input.AppIO_msg_ShowPlayerScore(score,name);
-            input.AppIO_msg_ShowDealerScore(dealer.getDealerScore()); //딜러 점수 보여주기
-            System.out.println("---------------------------------------");
         });
     }
 
     private void blackjack(String name, Player player) {
-        player.setBalance(player.getBalance() + player.getCurrentBet() * 2);
+        player.setBalance(player.getBalance() + player.getCurrentBet() * 3);
         player.setCurrentBet(0);
         input.AppIO_msg_WinBlackjack_Player(name);
     }
@@ -121,7 +120,7 @@ public class Evaluator {
         }
         // player가 블랙잭일 경우
         else if(player.cardlist_score_count() == 21 && player.getHand().getCardList().size() == 2){
-            returnBet = player.getCurrentBet()*2;
+            returnBet = player.getCurrentBet()*3;
             input.AppIO_msg_WinBlackjack_Player(name);
         }
 
